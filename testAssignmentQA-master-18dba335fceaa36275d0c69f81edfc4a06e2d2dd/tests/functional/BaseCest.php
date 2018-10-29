@@ -75,6 +75,7 @@ class BaseCest
      *
      * @return void
      */
+    // +
     public function cestBadParams(\FunctionalTester $I)
     {
         /**
@@ -82,8 +83,8 @@ class BaseCest
          */
         $I->amOnPage([
             'base/api',
-            'users' => [ ],
-            'platforms' => [ ]
+            'users' => [],
+            'platforms' => []
         ]);
 
         $I->seeResponseCodeIs(400);
@@ -95,6 +96,7 @@ class BaseCest
      *
      * @return void
      */
+    // +
     public function cestEmptyUsers(\FunctionalTester $I)
     {
         /**
@@ -102,14 +104,13 @@ class BaseCest
          */
         $I->amOnPage([
             'base/api',
-            'users' => [
-            ],
+            'users' => [],
             'platforms' => [
                 'gitlab',
             ]
         ]);
         $expected = "<pre>Bad Request: Missing required parameters: users</pre>";
-        $I ->assertEquals($expected, $I ->grabPageSource());
+        $I->assertEquals($expected, $I->grabPageSource());
         $I->seeResponseCodeIs(400);
     }
 
@@ -118,6 +119,7 @@ class BaseCest
      *
      * @return void
      */
+    // +
     public function cestEmptyPlatforms(\FunctionalTester $I)
     {
         /**
@@ -129,11 +131,10 @@ class BaseCest
             'users' => [
                 'kfr'
             ],
-            'platforms' => [
-            ]
+            'platforms' => []
         ]);
         $expected = "<pre>Bad Request: Missing required parameters: platforms</pre>";
-        $I ->assertEquals($expected, $I ->grabPageSource());
+        $I->assertEquals($expected, $I->grabPageSource());
         $I->seeResponseCodeIs(400);
     }
 
@@ -142,11 +143,14 @@ class BaseCest
      *
      * @return void
      */
+    // +-
     public function cestSeveralPlatforms(\FunctionalTester $I)
     {
         /**
          * @todo IMPLEMENT THIS
          */
+        // kfr kind of bad user for this
+        // cause he doesn't have any gitlab repos
         $I->amOnPage([
             'base/api',
             'users' => [
@@ -205,6 +209,7 @@ class BaseCest
      *
      * @return void
      */
+    // +
     public function cestSeveralUsers(\FunctionalTester $I)
     {
         /**
@@ -336,23 +341,24 @@ class BaseCest
      *
      * @return void
      */
+    // +
     public function cestUnknownPlatforms(\FunctionalTester $I)
     {
         /**
          * @todo IMPLEMENT THIS
          */
 
-        $I ->expectException(LogicException::class, function () use ($I){
+        $I->expectException(LogicException::class, function () use ($I) {
 
-        $I->amOnPage([
-            'base/api',
-            'users' => [
-                'kfr'
-            ],
-            'platforms' => [
-                'jjjjj',
-            ]
-        ]);
+            $I->amOnPage([
+                'base/api',
+                'users' => [
+                    'kfr'
+                ],
+                'platforms' => [
+                    'jjjjj',
+                ]
+            ]);
         });
 
 
@@ -364,6 +370,7 @@ class BaseCest
      *
      * @return void
      */
+    // +-
     public function cestUnknowUsers(\FunctionalTester $I)
     {
         /**
@@ -383,7 +390,7 @@ class BaseCest
         ]);
 
         $I->seeResponseCodeIs(200);
-
+        // there should be check for empty page
     }
 
     /**
@@ -391,6 +398,7 @@ class BaseCest
      *
      * @return void
      */
+    // +
     public function cestMixedUsers(\FunctionalTester $I)
     {
         /**
@@ -458,12 +466,14 @@ class BaseCest
      *
      * @return void
      */
+    // -
     public function cestMixedPlatforms(\FunctionalTester $I)
     {
         /**
          * @todo IMPLEMENT THIS
          */
-
+        // kfr kind of bad user for this
+        // cause he doesn't have any gitlab repos
         $I->amOnPage([
             'base/api',
             'users' => [
@@ -476,6 +486,9 @@ class BaseCest
             ]
         ]);
 
+        // why do 2 request?
+        // this is wrong
+        // you should use first one
         $I->amOnPage([
             'base/api',
             'users' => [
@@ -530,3 +543,5 @@ class BaseCest
 
     }
 }
+
+// result +5

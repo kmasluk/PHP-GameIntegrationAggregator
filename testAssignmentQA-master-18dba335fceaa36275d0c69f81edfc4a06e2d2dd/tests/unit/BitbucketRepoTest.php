@@ -15,11 +15,6 @@ use app\models;
  */
 class BitbucketRepoTest extends \Codeception\Test\Unit
 {
-    /**
-     * Test case for counting repo rating
-     *
-     * @return void
-     */
     private $name;
     private $forkCount;
     private $watcherCount;
@@ -38,10 +33,10 @@ class BitbucketRepoTest extends \Codeception\Test\Unit
         $this->forkCount = 0;
         $this->watcherCount = 2;
         $this->raiting = 1;
-        $this ->starCount = 0;
-        $this ->stringify = "kf-cli                                                                         0 ⇅           2 👁️";
+        $this->starCount = 0;
+        $this->stringify = "kf-cli                                                                         0 ⇅           2 👁️";
 
-        $this->project = new models\BitbucketRepo($this -> name, $this ->forkCount, $this ->watcherCount);
+        $this->project = new models\BitbucketRepo($this->name, $this->forkCount, $this->watcherCount);
     }
 
     public function testProjectClassIsFound()
@@ -49,12 +44,18 @@ class BitbucketRepoTest extends \Codeception\Test\Unit
         $this->assertInstanceOf(models\BitbucketRepo::class, $this->project);
     }
 
+    /**
+     * Test case for counting repo rating
+     *
+     * @return void
+     */
+    // +
     public function testRatingCount()
     {
         /**
          * @todo IMPLEMENT THIS
          */
-        $this -> assertEquals( $this ->raiting, $this ->project->getRating());
+        $this->assertEquals($this->raiting, $this->project->getRating());
     }
 
     /**
@@ -62,17 +63,21 @@ class BitbucketRepoTest extends \Codeception\Test\Unit
      *
      * @return void
      */
+    // +
     public function testData()
     {
         /**
          * @todo IMPLEMENT THIS
          */
-        $this ->assertEquals(
-            ['name' => $this->name,
+        $this->assertEquals(
+            [
+                'name' => $this->name,
                 'fork-count' => $this->forkCount,
                 'watcher-count' => $this->watcherCount,
-                'rating' => $this->raiting,],
-                $this ->project ->getData());
+                'rating' => $this->raiting,
+            ],
+            $this->project->getData()
+        );
     }
 
     /**
@@ -80,31 +85,36 @@ class BitbucketRepoTest extends \Codeception\Test\Unit
      *
      * @return void
      */
+    // +
     public function testStringify()
     {
         /**
          * @todo IMPLEMENT THIS
          */
-        $this -> assertEquals( $this ->stringify, $this ->project ->__toString());
+        $this->assertEquals($this->stringify, $this->project->__toString());
     }
 
-
-
+    // +-
     public function testgetName()
     {
-        $this -> assertEquals( $this-> name, $this ->project->getName());
+        // it's okay
+        $this->assertEquals($this->name, $this->project->getName());
+        // why do this?
+        // if getName already equals name
+        // this is redundant
         $name1 = null;
-        $this ->assertNull($name1, $this ->project ->getName());
+        $this->assertNull($name1, $this->project->getName());
     }
+
     /**
      * Test case for repo model getForkCount() verification
      *
      * @return void
      */
-
+    // +
     public function testgetForkCount()
     {
-        $this -> assertEquals($this-> forkCount, $this ->project->getForkCount());
+        $this->assertEquals($this->forkCount, $this->project->getForkCount());
     }
 
     /**
@@ -112,10 +122,10 @@ class BitbucketRepoTest extends \Codeception\Test\Unit
      *
      * @return void
      */
-
+    // +
     public function testgetStarCount()
     {
-        $this -> assertEquals( $this-> starCount, $this ->project->getStarCount());
+        $this->assertEquals($this->starCount, $this->project->getStarCount());
     }
 
     /**
@@ -123,10 +133,12 @@ class BitbucketRepoTest extends \Codeception\Test\Unit
      *
      * @return void
      */
-
+    // +
     public function testgetWatcherCount()
     {
-        $this -> assertEquals( $this-> watcherCount, $this ->project->getWatcherCount());
+        $this->assertEquals($this->watcherCount, $this->project->getWatcherCount());
     }
 
 }
+
+// result +6
